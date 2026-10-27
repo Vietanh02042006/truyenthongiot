@@ -1,0 +1,45 @@
+esphome:
+  name: esp32-s3-led
+  friendly_name: ESP32 S3 LED
+
+esp32:
+  board: esp32-s3-devkitc-1
+  framework:
+    type: arduino
+
+logger:
+
+api:
+
+ota:
+  - platform: esphome
+
+wifi:
+  ssid: "toan"
+  password: "66666666"
+  ap:
+    ssid: "ESP32-S3-Fallback"
+    password: "12345678"
+
+captive_portal:
+  
+sensor:
+  - platform: dht
+    pin: GPIO4
+    model: DHT11
+    temperature:
+      name: "Nhiet do phong"
+      accuracy_decimals: 1
+    humidity:
+      name: "Do am phong"
+      accuracy_decimals: 1
+    update_interval: 10s
+light:
+  - platform: esp32_rmt_led_strip
+    id: onboard_led
+    name: "LED Onboard"
+    pin: GPIO48
+    num_leds: 1
+    chipset: WS2812
+    channel_colors: GRB
+    restore_mode: ALWAYS_OFF
